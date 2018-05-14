@@ -12,7 +12,8 @@
                 <div class="field">
                   <label class="label">Name</label>
                   <p class="control">
-                    <input id="name"
+                    <input v-model="user.name"
+                         id="name"
                          type="text"
                          class="input"
                          name="name"
@@ -26,7 +27,8 @@
                 <div class="field">
                   <label class="label">Email</label>
                   <p class="control">
-                    <input id="email"
+                    <input v-model="user.email"
+                           id="email"
                            type="email"
                            class="input"
                            name="email"
@@ -39,7 +41,8 @@
                 <div class="field">
                   <label class="label">Password</label>
                   <p class="control">
-                    <input id="password"
+                    <input v-model="user.password"
+                           id="password"
                            type="password"
                            class="input"
                            name="password"
@@ -51,7 +54,8 @@
                 <div class="field">
                   <label class="label">Confirm Password</label>
                   <p class="control">
-                    <input id="password-confirm"
+                    <input v-model="user.password_confirmation"
+                           id="password-confirm"
                            type="password"
                            class="input"
                            name="password_confirmation"
@@ -62,7 +66,7 @@
                 </div>
                 <hr>
                 <p class="control">
-                  <button class="button is-primary">Sign up!</button>
+                  <button @click="signup" class="button is-primary">Sign up!</button>
                 </p>
               </div>
             </div>
@@ -79,8 +83,43 @@
 </template>
 
 <script>
+/* eslint-disable no-console */
+
+import Form from 'form-object';
+import axios from 'axios';
+
 export default {
   name: 'SignUp',
+  data() {
+    return {
+      form: new Form(),
+      user: {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+      },
+    };
+  },
+  methods: {
+    signup() {
+      // TODO: Move the api requests to a separated class and set the base api host
+      axios.post('http://vuegym.test/api/auth/signup', this.user)
+        .then((response) => {
+          this.user = {
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: '',
+          };
+          console.log(`status: ${response.status}`);
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
 };
 </script>
 

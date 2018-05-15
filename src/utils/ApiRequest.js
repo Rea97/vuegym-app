@@ -6,6 +6,6 @@ export default class {
   }
 
   signUp(data) {
-    return axios.post(`${this.baseUrl}/signup`, data);
+    return axios.post(`${this.baseUrl}/auth/signup`, data);
   }
 }

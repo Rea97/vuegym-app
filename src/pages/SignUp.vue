@@ -84,15 +84,10 @@
 
 <script>
 /* eslint-disable no-console */
-
-import Form from 'form-object';
-import axios from 'axios';
-
 export default {
   name: 'SignUp',
   data() {
     return {
-      form: new Form(),
       user: {
         name: '',
         email: '',
@@ -103,20 +98,13 @@ export default {
   },
   methods: {
     signup() {
-      // TODO: Move the api requests to a separated class and set the base api host
-      axios.post('http://vuegym.test/api/auth/signup', this.user)
+      this.$store.dispatch('signUp', this.user)
+      // eslint-disable-next-line no-unused-vars
         .then((response) => {
-          this.user = {
-            name: '',
-            email: '',
-            password: '',
-            password_confirmation: '',
-          };
-          console.log(`status: ${response.status}`);
-          console.log(response);
+          this.$router.push('/home');
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response.data.error);
         });
     },
   },

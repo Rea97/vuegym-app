@@ -25,4 +25,8 @@ export default {
         });
     });
   },
+  logOut({ commit }) {
+    commit(SET_AUTH_USER, { name: '', email: '' });
+    commit(SET_TOKEN, '');
+  },
 };

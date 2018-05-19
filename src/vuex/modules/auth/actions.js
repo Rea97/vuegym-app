@@ -26,6 +26,9 @@ export default {
     });
   },
   logOut({ commit }) {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('authUserName');
+    window.localStorage.removeItem('authUserEmail');
     commit(SET_AUTH_USER, { name: '', email: '' });
     commit(SET_TOKEN, '');
   },

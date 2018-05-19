@@ -12,6 +12,7 @@
       </a>
     </div>
     <div class="navbar-end">
+      <router-link v-if="!isAuthenticated" to="/signin">Sign in</router-link>
       <router-link v-if="!isAuthenticated" to="/signup">Sign up</router-link>
       <a v-if="isAuthenticated" @click.prevent="logOut" class="navbar-item">
         <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Log out

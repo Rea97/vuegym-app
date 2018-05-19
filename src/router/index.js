@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/vuex/store';
 import Landing from '@/pages/Landing';
+import SignIn from '@/pages/SignIn';
 import SignUp from '@/pages/SignUp';
 import Home from '@/pages/Home';
 
@@ -20,7 +21,7 @@ const ifAuthenticated = (to, from, next) => {
     next();
     return;
   }
-  next('/login');
+  next('/signin');
 };
 
 export default new Router({
@@ -29,6 +30,12 @@ export default new Router({
       path: '/',
       name: 'Landing',
       component: Landing,
+    },
+    {
+      path: '/signin',
+      name: 'SignIn',
+      component: SignIn,
+      beforeEnter: ifNotAuthenticated,
     },
     {
       path: '/signup',

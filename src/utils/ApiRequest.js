@@ -12,4 +12,8 @@ export default class {
   signUp(data) {
     return axios.post(`${this.baseUrl}/auth/signup`, data);
   }
+
+  logOut() {
+    return axios.post(`${this.baseUrl}/auth/logout`);
+  }
 }

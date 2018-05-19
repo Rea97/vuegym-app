@@ -47,10 +47,18 @@ export default {
     });
   },
   logOut({ commit }) {
-    window.localStorage.removeItem('token');
-    window.localStorage.removeItem('authUserName');
-    window.localStorage.removeItem('authUserEmail');
-    commit(SET_AUTH_USER, { name: '', email: '' });
-    commit(SET_TOKEN, '');
+    api.logOut()
+    // eslint-disable-next-line no-unused-vars
+      .then((response) => {
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('authUserName');
+        window.localStorage.removeItem('authUserEmail');
+        commit(SET_AUTH_USER, { name: '', email: '' });
+        commit(SET_TOKEN, '');
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error.response);
+      });
   },
 };

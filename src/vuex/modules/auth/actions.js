@@ -1,3 +1,4 @@
+import axios from 'axios';
 import ApiRequest from '../../../utils/ApiRequest';
 import { SET_AUTH_USER, SET_TOKEN } from './mutation_types';
 
@@ -11,6 +12,8 @@ export default {
           window.localStorage.setItem('token', response.data.token);
           window.localStorage.setItem('authUserName', response.data.user.name);
           window.localStorage.setItem('authUserEmail', response.data.user.email);
+
+          axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
 
           commit(SET_TOKEN, response.data.token);
           commit(SET_AUTH_USER, response.data.user);
@@ -33,6 +36,8 @@ export default {
           window.localStorage.setItem('authUserName', response.data.user.name);
           window.localStorage.setItem('authUserEmail', response.data.user.email);
 
+          axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
+
           commit(SET_TOKEN, response.data.token);
           commit(SET_AUTH_USER, response.data.user);
           resolve(response);
@@ -47,18 +52,22 @@ export default {
     });
   },
   logOut({ commit }) {
-    api.logOut()
-    // eslint-disable-next-line no-unused-vars
-      .then((response) => {
-        window.localStorage.removeItem('token');
-        window.localStorage.removeItem('authUserName');
-        window.localStorage.removeItem('authUserEmail');
-        commit(SET_AUTH_USER, { name: '', email: '' });
-        commit(SET_TOKEN, '');
-      })
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log(error.response);
-      });
+    return new Promise((resolve, reject) => {
+      api.logOut()
+        .then((response) => {
+          window.localStorage.removeItem('token');
+          window.localStorage.removeItem('authUserName');
+          window.localStorage.removeItem('authUserEmail');
+
+          delete axios.defaults.headers.common.Authorization;
+
+          commit(SET_AUTH_USER, { name: '', email: '' });
+          commit(SET_TOKEN, '');
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   },
 };

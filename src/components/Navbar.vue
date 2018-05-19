@@ -22,16 +22,26 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Navbar',
   computed: mapGetters([
     'isAuthenticated',
   ]),
-  methods: mapActions([
-    'logOut',
-  ]),
+  methods: {
+    logOut() {
+      this.$store.dispatch('logOut')
+      // eslint-disable-next-line no-unused-vars
+        .then((response) => {
+          this.$router.push('/');
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.log(error);
+        });
+    },
+  },
 };
 </script>
 

@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item">
-        <router-link to="/" tag="h1">VueGymApp</router-link>
-      </a>
+      <h1>
+        <router-link class="navbar-item" to="/">VueGymApp</router-link>
+      </h1>
 
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
         <span aria-hidden="true"></span>
@@ -12,8 +12,8 @@
       </a>
     </div>
     <div class="navbar-end">
-      <router-link v-if="!isAuthenticated" to="/signin">Sign in</router-link>
-      <router-link v-if="!isAuthenticated" to="/signup">Sign up</router-link>
+      <router-link v-if="!isAuthenticated" to="/signin" class="navbar-item">Sign in</router-link>
+      <router-link v-if="!isAuthenticated" to="/signup" class="navbar-item">Sign up</router-link>
       <a v-if="isAuthenticated" @click.prevent="logOut" class="navbar-item">
         <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Log out
       </a>

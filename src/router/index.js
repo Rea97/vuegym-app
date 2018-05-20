@@ -50,4 +50,5 @@ export default new Router({
       beforeEnter: ifAuthenticated,
     },
   ],
+  linkActiveClass: 'is-active',
 });

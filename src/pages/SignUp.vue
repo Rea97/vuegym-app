@@ -4,8 +4,8 @@
       <div class="container">
         <div class="columns is-vcentered">
           <div class="column is-4 is-offset-4">
-            <h1 class="title">
-              Sign up!
+            <h1 class="title has-text-centered">
+              <router-link to="/">VueGymApp</router-link>
             </h1>
             <div class="box">
               <div class="form-horizontal">
@@ -71,7 +71,7 @@
               </div>
             </div>
             <p class="has-text-centered">
-              <a href="#">Sign in</a>
+              <router-link to="/signin">Sign in</router-link>
               |
               <a href="#">Help</a>
             </p>

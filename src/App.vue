@@ -1,7 +1,19 @@
 <template>
   <div id="app">
     <app-navbar v-show="shouldShowNavbar"></app-navbar>
-    <router-view/>
+
+    <template v-if="!shouldUseDashboardLayout"><router-view/></template>
+
+    <div v-if="shouldUseDashboardLayout" class="container">
+      <div class="columns">
+        <div class="column is-3">
+          <app-sidebar></app-sidebar>
+        </div>
+        <div class="column is-9">
+          <router-view></router-view>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -9,11 +21,13 @@
 import axios from 'axios';
 import { mapActions } from 'vuex';
 import AppNavbar from './components/Navbar';
+import AppSidebar from './components/Sidebar';
 
 export default {
   name: 'App',
   components: {
     AppNavbar,
+    AppSidebar,
   },
   methods: mapActions(['logOut']),
   created() {
@@ -33,10 +47,14 @@ export default {
     shouldShowNavbar() {
       return this.$route.name !== 'SignUp' && this.$route.name !== 'SignIn';
     },
+    shouldUseDashboardLayout() {
+      return this.$route.name !== 'Landing'
+        && this.$route.name !== 'SignIn'
+        && this.$route.name !== 'SignUp';
+    },
   },
 };
 </script>
 
-<style>
-
-</style>
+<style src="./assets/scss/app.scss" lang="scss"></style>
+<style src="./assets/css/app.css"></style>

@@ -37,6 +37,5 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
+<style src="./assets/scss/app.scss" lang="scss"></style>
+<style src="./assets/css/app.css"></style>

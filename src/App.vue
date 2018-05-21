@@ -5,7 +5,7 @@
     <template v-if="!shouldUseDashboardLayout"><router-view/></template>
 
     <div v-if="shouldUseDashboardLayout" class="container">
-      <div class="colums">
+      <div class="columns">
         <div class="column is-3">
           <app-sidebar></app-sidebar>
         </div>

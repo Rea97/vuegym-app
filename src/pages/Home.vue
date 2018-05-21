@@ -48,7 +48,7 @@
         </div>
       </div>
     </section>
-    <div class="colums">
+    <div class="columns">
       <div class="column is-6">
         <div class="card events-card">
           <header class="card-header">

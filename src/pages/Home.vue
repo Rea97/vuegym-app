@@ -8,18 +8,13 @@
         <li class="is-active"><a href="#" aria-current="page">Admin</a></li>
       </ul>
     </nav>
-    <section class="hero is-info welcome is-small">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">
-            Hello, Admin.
-          </h1>
-          <h2 class="subtitle">
-            I hope you are having a great day!
-          </h2>
-        </div>
-      </div>
-    </section>
+    <app-dashboard-welcome
+      :user="authUser.name"
+      :change-interval="5"
+      :phrases="phrases"
+      animation-class="fadeIn"
+      :animation-timeout="2">
+    </app-dashboard-welcome>
     <section class="info-tiles">
       <div class="tile is-ancestor has-text-centered">
         <div class="tile is-parent">
@@ -176,8 +171,27 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import AppDashboardWelcome from '../components/DashboardWelcome';
+
 export default {
   name: 'Home',
+  components: {
+    AppDashboardWelcome,
+  },
+  computed: mapGetters(['authUser']),
+  data() {
+    return {
+      phrases: [
+        'Get ripped, get laid.',
+        'Pain is weakness leaving the body.',
+        'Being defeated is often a temporary condition. Giving up is what makes it permanent',
+        'Hard work beats talent when talent doesn’t work hard.',
+        'Good is not enough if better is possible.',
+        'No pain, no gain!',
+      ],
+    };
+  },
 };
 </script>
 
